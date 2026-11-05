@@ -1,5 +1,7 @@
 # DSH 下一句预测（dsh-tab-complete）
 
+简体中文（默认） | [English](README.en.md)
+
 为 DeepSeek Harness 输入框提供下一句灰字建议，按 Tab 填入草稿，用户自行确认后发送。
 
 **预测始终开启，会把当前可见会话末尾最多 2000 个字符、当前时间、本地时区及可用的最后消息时间交给 DSH 已配置的模型，可能产生用量或费用。停用请卸载插件。**
@@ -49,6 +51,6 @@ node test/client-state.test.mjs
 
 测试使用模拟服务和 React 插槽适配器，不发送真实模型请求。宿主测试会写入诊断文件；可先将 `DSH_HOME` 指向临时目录。
 
-## License
+## 许可证
 
 MIT，见 [LICENSE](LICENSE)。
