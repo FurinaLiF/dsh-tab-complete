@@ -1,0 +1,47 @@
+{
+  "name": "dsh-tab-complete",
+  "version": "0.3.2",
+  "description": "DSH 下一句预测：上下文灰字建议，Tab 填入草稿，不自动发送。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "composer",
+    "autocomplete",
+    "ghost-text"
+  ],
+  "author": "FurinaLiF",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FurinaLiF/dsh-tab-complete.git"
+  },
+  "homepage": "https://github.com/FurinaLiF/dsh-tab-complete#readme",
+  "bugs": {
+    "url": "https://github.com/FurinaLiF/dsh-tab-complete/issues"
+  },
+  "scripts": {
+    "test": "node test/host.test.mjs && node test/client-state.test.mjs"
+  }
+}

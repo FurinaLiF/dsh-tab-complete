@@ -1,0 +1,7 @@
+# dsh-tab-complete bundle patch: mounts the host half (one HTTP route that
+# asks the registered LLM for a continuation) into the web profile. The client
+# half draws the ghost text and owns the Tab key.
+
+- insert:
+    - id: dsh-tab-complete
+      name: dsh-tab-complete
