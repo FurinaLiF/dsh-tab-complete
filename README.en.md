@@ -20,6 +20,7 @@ To uninstall, quit DSH, run `dsh plugin --profile desktop remove dsh-tab-complet
 
 ## Usage
 
+- Requests prediction on the next UI event-loop turn after the assistant finishes, removing the previous fixed one-second wait. Model response time still affects when the hint appears.
 - Tab inserts the suggestion as a draft. It never sends the message or executes a suggested action.
 - Clearing an accepted draft restores the cached suggestion for the same turn and local date without another model request.
 - Esc dismisses the current suggestion.
@@ -29,6 +30,10 @@ To uninstall, quit DSH, run `dsh plugin --profile desktop remove dsh-tab-complet
 - Current and historical message times help interpret expressions such as “tomorrow” or “tonight.” Missing message times are marked unknown, and an invalid timezone falls back to a labeled UTC time.
 
 Suggestions may be wrong, including suggesting actions you have not authorized. Only a message you actually send is an instruction.
+
+## Version 0.3.3
+
+Removes the fixed one-second wait before prediction. Offline regression tests cover zero-delay scheduling. End-to-end latency in the live UI has not been remeasured.
 
 ## Compatibility and verification
 

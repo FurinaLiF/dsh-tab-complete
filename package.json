@@ -1,6 +1,6 @@
 {
   "name": "dsh-tab-complete",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "DSH 下一句预测：上下文灰字建议，Tab 填入草稿，不自动发送。",
   "license": "MIT",
   "type": "module",
