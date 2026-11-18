@@ -66,7 +66,7 @@ vm.runInNewContext(fs.readFileSync(new URL('../lib/client.js', import.meta.url),
   AbortController,
   Date: ClockDate,
   MutationObserver: class { observe() {} disconnect() {} },
-  setTimeout: callback => { timers.set(++nextTimer, callback); return nextTimer; },
+  setTimeout: (callback, delay) => { timers.set(++nextTimer, { callback, delay }); return nextTimer; },
   clearTimeout: id => timers.delete(id),
 });
 assert.deepEqual(slots.map(slot => slot.spec.name), ['conversation.input.overlay']);
@@ -81,9 +81,12 @@ function render() {
   while (pending.length) pending.shift()();
   return tree.children[0];
 }
-async function settle() {
-  const callbacks = [...timers.values()]; timers.clear();
-  for (const callback of callbacks) await callback();
+async function settle({ withoutDelay = false } = {}) {
+  for (const [id, { callback, delay }] of [...timers]) {
+    if (withoutDelay && delay > 0) continue;
+    timers.delete(id);
+    await callback();
+  }
   return render();
 }
 function key(key) {
@@ -114,7 +117,8 @@ assert.equal(await settle(), '', 'Esc still dismisses this suggestion');
 assert.equal(requests, 1);
 running = true; render(); assert.equal(render(), '');
 transcript.innerText += '\n用户：继续。\n助手：新一轮已完成。';
-running = false; render(); assert.equal(await settle(), suggestion);
+running = false; render();
+assert.equal(await settle({ withoutDelay: true }), suggestion, 'A completed turn predicts on the next event-loop turn');
 assert.equal(requests, 2, 'A new completed turn can predict again');
 clock += 86400000;
 listeners.get('focus')();
